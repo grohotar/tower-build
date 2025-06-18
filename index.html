@@ -25,7 +25,7 @@
     let newWorker;
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/service-worker.js').then(reg => {
+        navigator.serviceWorker.register('service-worker.js', { scope: './' }).then(reg => {
           reg.addEventListener('updatefound', () => {
             newWorker = reg.installing;
             newWorker.addEventListener('statechange', () => {
