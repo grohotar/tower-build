@@ -11,11 +11,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;700&display=swap">
 </head>
 <body>
-  <div id="app-version" style="position:fixed;top:10px;right:16px;z-index:100;font-size:0.95em;color:#888;background:#fff8;border-radius:8px;padding:4px 12px;backdrop-filter:blur(2px);pointer-events:none;">v4</div>
   <div id="game-container">
     <canvas id="game-canvas"></canvas>
     <div id="ui">
-      <div id="score">Счёт: 0</div>
+      <div id="score">Счёт: 0 <span id="app-version" style="font-size:0.85em;color:#888;background:#fff8;border-radius:8px;padding:2px 8px;margin-left:8px;vertical-align:middle;">v4</span></div>
       <button id="restart-btn" style="display:none">Заново</button>
       <button id="update-btn" style="display:none; margin-left:12px; background:#ff9800;">Обновить</button>
       <div id="update-notice" style="display:none; color:#ff9800; font-size:0.95em; margin-left:12px;">Доступна новая версия! Перезапустите приложение для обновления.</div>
