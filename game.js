@@ -36,6 +36,7 @@ resizeCanvas();
 // Настройки башни
 const BLOCK_W = 120;
 const BLOCK_H = 28;
+const BOTTOM_MARGIN = 20; // px, чтобы башня не была вплотную к низу
 const SPEED_MIN = 1.1;
 const SPEED_MAX = 1.7;
 const CENTER_TOLERANCE = 18; // px
@@ -61,7 +62,7 @@ function updateScoreDisplay() {
 
 function startGame() {
   resizeCanvas();
-  tower = [{ x: W/2, y: H - BLOCK_H/2, w: BLOCK_W, color: getRandomColor() }];
+  tower = [{ x: W/2, y: H - BLOCK_H/2 - BOTTOM_MARGIN, w: BLOCK_W, color: getRandomColor() }];
   score = 0;
   isRunning = true;
   spawnBlock();
@@ -74,7 +75,7 @@ function spawnBlock(width) {
   const dir = Math.random() < 0.5 ? 1 : -1;
   movingBlock = {
     x: dir === 1 ? 0 : W,
-    y: H - BLOCK_H/2 - BLOCK_H * tower.length,
+    y: H - BLOCK_H/2 - BLOCK_H * tower.length - BOTTOM_MARGIN,
     w: width || BLOCK_W,
     h: BLOCK_H,
     speed: (SPEED_MIN + Math.random() * (SPEED_MAX - SPEED_MIN)) * dir,
