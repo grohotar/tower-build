@@ -1,3 +1,4 @@
+// Версия service worker: 2
 const CACHE_NAME = 'tower-cache-v1';
 const urlsToCache = [
   '/',
