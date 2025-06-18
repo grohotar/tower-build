@@ -17,12 +17,16 @@
       <div id="score">Счёт: 0</div>
       <button id="restart-btn" style="display:none">Заново</button>
       <button id="update-btn" style="display:none; margin-left:12px; background:#ff9800;">Обновить</button>
+      <div id="update-notice" style="display:none; color:#ff9800; font-size:0.95em; margin-left:12px;">Доступна новая версия! Перезапустите приложение для обновления.</div>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   <script src="game.js"></script>
   <script>
     let newWorker;
+    function isIosStandalone() {
+      return (window.navigator.standalone === true) || (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
+    }
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
         navigator.serviceWorker.register('service-worker.js', { scope: './' }).then(reg => {
@@ -30,7 +34,11 @@
             newWorker = reg.installing;
             newWorker.addEventListener('statechange', () => {
               if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                document.getElementById('update-btn').style.display = 'inline-block';
+                if (isIosStandalone()) {
+                  document.getElementById('update-notice').style.display = 'block';
+                } else {
+                  document.getElementById('update-btn').style.display = 'inline-block';
+                }
               }
             });
           });
