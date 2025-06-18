@@ -15,43 +15,11 @@
     <canvas id="game-canvas"></canvas>
     <div id="ui">
       <div id="score" style="flex:1;text-align:left;">Счёт: 0</div>
-      <div id="app-version" style="font-size:0.85em;color:#888;background:#fff8;border-radius:8px;padding:2px 8px;margin-left:8px;vertical-align:middle;text-align:right;">v6</div>
+      <div id="app-version" style="font-size:0.85em;color:#888;background:#fff8;border-radius:8px;padding:2px 8px;margin-left:8px;vertical-align:middle;text-align:right;">v7</div>
       <button id="restart-btn" style="display:none">Заново</button>
-      <button id="update-btn" style="display:none; margin-left:12px; background:#ff9800;">Обновить</button>
-      <div id="update-notice" style="display:none; color:#ff9800; font-size:0.95em; margin-left:12px;">Доступна новая версия! Перезапустите приложение для обновления.</div>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   <script src="game.js"></script>
-  <script>
-    let newWorker;
-    function isIosStandalone() {
-      return (window.navigator.standalone === true) || (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
-    }
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('service-worker.js', { scope: './' }).then(reg => {
-          reg.addEventListener('updatefound', () => {
-            newWorker = reg.installing;
-            newWorker.addEventListener('statechange', () => {
-              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                if (isIosStandalone()) {
-                  document.getElementById('update-notice').style.display = 'block';
-                } else {
-                  document.getElementById('update-btn').style.display = 'inline-block';
-                }
-              }
-            });
-          });
-        });
-      });
-    }
-    document.getElementById('update-btn').onclick = function() {
-      if (newWorker) {
-        newWorker.postMessage({ action: 'skipWaiting' });
-      }
-      window.location.reload();
-    };
-  </script>
 </body>
 </html> 
