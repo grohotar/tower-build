@@ -27,8 +27,7 @@ body {
   display: block;
   width: 100vw;
   max-width: 420px;
-  height: 80vh;
-  max-height: 600px;
+  flex: 1 1 auto;
   background: #fff;
   border-bottom: 2px solid #e0e0e0;
 }
@@ -41,12 +40,8 @@ body {
   padding: 0 16px;
   box-sizing: border-box;
   background: #fff;
-  position: fixed;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
+  position: static;
   border-top: 1px solid #e0e0e0;
-  z-index: 10;
   height: 56px;
   min-height: 56px;
 }
@@ -80,8 +75,6 @@ body {
     max-width: 100vw;
   }
   #game-canvas {
-    height: 60vw;
-    max-height: 80vw;
     min-height: 320px;
   }
   #ui {

@@ -6,8 +6,32 @@ const scoreDiv = document.getElementById('score');
 const restartBtn = document.getElementById('restart-btn');
 
 let W = 360, H = 540;
-canvas.width = W;
-canvas.height = H;
+
+function resizeCanvas() {
+  const container = document.getElementById('game-container');
+  let width = window.innerWidth;
+  let height = window.innerHeight;
+  width = Math.min(width, 420);
+  height = Math.min(height, 700);
+  // Вычитаем высоту бара
+  let barHeight = window.innerWidth <= 500 ? 48 : 56;
+  W = width;
+  H = height - barHeight;
+  canvas.width = W;
+  canvas.height = H;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+}
+
+window.addEventListener('resize', () => {
+  resizeCanvas();
+  // Перерисовать башню после изменения размера
+  if (typeof tower !== 'undefined' && typeof gameLoop === 'function') {
+    gameLoop();
+  }
+});
+
+resizeCanvas();
 
 // Настройки башни
 const BLOCK_W = 120;
@@ -36,6 +60,7 @@ function updateScoreDisplay() {
 }
 
 function startGame() {
+  resizeCanvas();
   tower = [{ x: W/2, y: H - BLOCK_H/2, w: BLOCK_W, color: getRandomColor() }];
   score = 0;
   isRunning = true;
